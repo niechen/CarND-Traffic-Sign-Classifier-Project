@@ -5,3 +5,5 @@ models
 *.swp
 *.p
 .idea
+checkpoint
+lenet.*
