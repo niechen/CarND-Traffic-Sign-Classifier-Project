@@ -18,6 +18,7 @@ The goals / steps of this project are the following:
 [image1]: ./writeup/training_set_labels.png "Visualization"
 [error_color]: ./writeup/error_color.png "Error with color"
 [image2]: ./writeup/grayscale.png "Grayscaling"
+[lenet]: ./writeup/lenet.png "Lenet"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -103,9 +104,8 @@ My final model consisted of the following layers:
 | RELU					||
 | Fully connected		| outputs 160, with dropout keep_prob=0.3|
 | RELU					||
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
+| Fully connected		| outputs 43, with dropout keep_prob=0.3|
+| Softmax				||
  
 
 
@@ -121,17 +121,20 @@ My final model results were:
 * test set accuracy of 94.7%
 
 If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+* What was the first architecture that was tried and why was it chosen?
+
+	I choose the Lenet architecture as the first architecture because it's proven to be effective on similar problems such as hand written digit classification. I changed the output to 43 classes to fit our dataset but kept all input and hidden layer architecture unchanged.    
+* What were some problems with the initial architecture?
+
+	The Lenet architecture is underfitting to our traffic sign dataset. Both of the training and validation accuracy is low between 70% and 80% indicating the Lenet architecture has a high bias and is not capable of learning complex representations.
+
+* How was the architecture adjusted and why was it adjusted? 
+	
+	Since the starting architeture has a high bias and low variance, I decided to make the hidden layers larger to give it more variance. After adding more neurons to the hidden layers, the model seems to stuck at a place where it is overfitting the training set. The evidence is a high training accuracy ~99% paired with a low validation accuracy ~ 75%. So I added dropout to the fully connected layers, to regularize the coefficients and force the network to learn a set of redundent representation of the features. Dropouts are not added to the convolutional layers since the convolution already has regularization by coefficients sharing.
+	
+	The width of the layers and the dropout percentages are tuned to find a sweet spot where the model is flexible enough to capture all the variances but not overfitting. After some trial and error, the final architeture (as descriped in the table above) has wider hidden layers and achieves 99.7% training accuracy and 97% validation accuracy.
+
 
 ###Test a Model on New Images
 
