@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>writeup</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0"><strong>Traffic Sign Recognition</strong></h1>
+
+<hr>
+
+<p><strong>Build a Traffic Sign Recognition Project</strong></p>
+
+<p>The goals / steps of this project are the following:
+* Load the data set (see below for links to the project data set)
+* Explore, summarize and visualize the data set
+* Design, train and test a model architecture
+* Use the model to make predictions on new images
+* Analyze the softmax probabilities of the new images
+* Summarize the results with a written report</p>
+
+<h2 id="toc_1">Rubric Points</h2>
+
+<h3 id="toc_2">Here I will consider the <a href="https://review.udacity.com/#!/rubrics/481/view">rubric points</a> individually and describe how I addressed each point in my implementation.</h3>
+
+<hr>
+
+<h3 id="toc_3">Writeup / README</h3>
+
+<h4 id="toc_4">1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.</h4>
+
+<p>You&#39;re reading it! and here is a link to my <a href="https://github.com/niechen/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb">project code</a></p>
+
+<h3 id="toc_5">Data Set Summary &amp; Exploration</h3>
+
+<h4 id="toc_6">1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.</h4>
+
+<p>I used the pandas library to calculate summary statistics of the traffic
+signs data set:</p>
+
+<ul>
+<li>The size of training set is 34799</li>
+<li>The size of the validation set is 4410</li>
+<li>The size of test set is 12630</li>
+<li>The shape of a traffic sign image is 32x32x3</li>
+<li>The number of unique classes/labels in the data set is 43</li>
+</ul>
+
+<h4 id="toc_7">2. Include an exploratory visualization of the dataset.</h4>
+
+<p>Here is an exploratory visualization of the data set. It is a bar chart showing the class distribution in the training set. We can see that the training set data is not balanced.</p>
+
+<p><img src="./writeup/training_set_labels.png" alt="alt text" title="Visualization"></p>
+
+<h3 id="toc_8">Design and Test a Model Architecture</h3>
+
+<h4 id="toc_9">1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the &quot;Stand Out Suggestions&quot; part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)</h4>
+
+<p>As a first step, I decided to convert the images to grayscale because helps luminance is more important than color in identifying visual features such as edges, shapes and objects. Converting images to grayscale reduces amount of information contained in each image while still containing the information needed for classifying traffic signs thus improving signal to noise ratio.</p>
+
+<p>When image is not turned into grayscale, the model seems to pickup too much noise from training set and overfits. Here is a plot of training and validation error before color is removed. Notice the gap between training and validation is about 20%.</p>
+
+<p><img src="./writeup/error_color.png" alt="training and validation error before removing error" title="Error with color"></p>
+
+<p>Here are few examples of traffic sign images before and after grayscaling.</p>
+
+<p><img src="./writeup/grayscale.png" alt="grayscaling images" title="Grayscaling"></p>
+
+<p>The I qualized the image histogram to improve the contrast of the images by streching out the intensity range. This step is chosen because some of the image are taken under poor lighing conditions and are either too dark or too bright. Here are few images before and after image histogram equalization.</p>
+
+<p>![histogram equalization][equalization]</p>
+
+<p>As a last step, I normalized the image data because ...</p>
+
+<p>I decided to generate additional data because ... </p>
+
+<p>To add more data to the the data set, I used the following techniques because ... </p>
+
+<p>Here is an example of an original image and an augmented image:</p>
+
+<p><img src="./examples/random_noise.jpg" alt="alt text" title="Random Noise"></p>
+
+<p>The difference between the original data set and the augmented data set is the following ... </p>
+
+<h4 id="toc_10">2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.</h4>
+
+<p>My final model consisted of the following layers:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">Layer</th>
+<th style="text-align: center">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">Input</td>
+<td style="text-align: center">32x32x1 grayscale image</td>
+</tr>
+<tr>
+<td style="text-align: center">Convolution 5x5</td>
+<td style="text-align: center">1x1 stride, valid padding, outputs 28x28x12</td>
+</tr>
+<tr>
+<td style="text-align: center">RELU</td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center">Max pooling</td>
+<td style="text-align: center">2x2 stride,  outputs 14x14x12</td>
+</tr>
+<tr>
+<td style="text-align: center">Convolution 5x5</td>
+<td style="text-align: center">1x1 stride, valid padding, outputs 10x10x32</td>
+</tr>
+<tr>
+<td style="text-align: center">RELU</td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center">Max pooling</td>
+<td style="text-align: center">2x2 stride,  outputs 5x5x32</td>
+</tr>
+<tr>
+<td style="text-align: center">Fully connected</td>
+<td style="text-align: center">outputs 480, with dropout keep_prob=0.3</td>
+</tr>
+<tr>
+<td style="text-align: center">RELU</td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center">Fully connected</td>
+<td style="text-align: center">outputs 160, with dropout keep_prob=0.3</td>
+</tr>
+<tr>
+<td style="text-align: center">RELU</td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center">Fully connected</td>
+<td style="text-align: center">outputs 43, with dropout keep_prob=0.3</td>
+</tr>
+<tr>
+<td style="text-align: center">Softmax</td>
+<td style="text-align: center"></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_11">3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.</h4>
+
+<p>To train the model, I used an Adam optimizer with batch size set to 128 and learning rate set to 0.0005 and 200 epochs.</p>
+
+<h4 id="toc_12">4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.</h4>
+
+<p>My final model results were:
+* training set accuracy of 99.7%
+* validation set accuracy of 96.1%
+* test set accuracy of 94.2%</p>
+
+<p>If an iterative approach was chosen:</p>
+
+<ul>
+<li><p>What was the first architecture that was tried and why was it chosen?</p>
+
+<p>I choose the Lenet architecture as the first architecture because it&#39;s proven to be effective on similar problems such as hand written digit classification. I changed the output to 43 classes to fit our dataset but kept all input and hidden layer architecture unchanged.    </p></li>
+<li><p>What were some problems with the initial architecture?</p>
+
+<p>The Lenet architecture is underfitting to our traffic sign dataset. Both of the training and validation accuracy is low between 70% and 80% indicating the Lenet architecture has a high bias and is not capable of learning complex representations.</p></li>
+<li><p>How was the architecture adjusted and why was it adjusted? </p>
+
+<p>Since the starting architeture has a high bias and low variance, I decided to make the hidden layers larger to give it more variance. After adding more neurons to the hidden layers, the model seems to stuck at a place where it is overfitting the training set. The evidence is a high training accuracy ~99% paired with a low validation accuracy ~ 75%. So I added dropout to the fully connected layers, to regularize the coefficients and force the network to learn a set of redundent representation of the features. Dropouts are not added to the convolutional layers since the convolution already has regularization by coefficients sharing.</p>
+
+<p>The width of the layers and the dropout percentages are tuned to find a sweet spot where the model is flexible enough to capture all the variances but not overfitting. After some trial and error, the final architeture (as descriped in the table above) has wider hidden layers and achieves 99.7% training accuracy and 97% validation accuracy.</p></li>
+</ul>
+
+<h3 id="toc_13">Test a Model on New Images</h3>
+
+<h4 id="toc_14">1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.</h4>
+
+<p>Here are five German traffic signs that I found on the web:</p>
+
+<p><img src="./writeup/test1.tiff" alt="alt text" title="Traffic Sign 1"> </p>
+
+<p>The first image might be difficult to classify because it&#39;s similar to other speed limit signs with only difference being the first digit. The last image (road work) might be difficult to classify because it&#39;s quite similar to the pedestrians sign.</p>
+
+<h4 id="toc_15">2. Discuss the model&#39;s predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the &quot;Stand Out Suggestions&quot; part of the rubric).</h4>
+
+<p>Here are the results of the prediction:</p>
+
+<p><img src="./writeup/test2.tiff" alt="alt text" title="Traffic Sign 2"></p>
+
+<p>The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. This compares poorly to the accuracy on the test set of 94.2%. </p>
+
+<h4 id="toc_16">3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the &quot;Stand Out Suggestions&quot; part of the rubric, visualizations can also be provided such as bar charts)</h4>
+
+<p>The code for making predictions on my final model is located in the 31th cell of the Ipython notebook.</p>
+
+<p>The top 5 probablities are shown below the images in the previous diagram.</p>
+
+<p>The model is quire sure about the prediction on #1 #2 #3 and #4 all with a probability close to 100% for the highest scoring class. The model correctly classified #2 #3 and #4 while incorrectly classified #1 to a class that does not seem to be related. </p>
+
+<p>The model also classified #5 wrong with a low confidence in the prediction. The traffic sign in this image looks quite similar to the signs the model predicts (especially with Pedestrians), so it&#39;s not a surprise.</p>
+
+<p>It&#39;s quite mysterious how the model predicts #1 as a Slippery Raod. I need to investigate more to understand the root cause. Visualizing the neural network might help better understand this.</p>
+
+<h3 id="toc_17">(Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)</h3>
+
+<h4 id="toc_18">1. Discuss the visual output of your trained network&#39;s feature maps. What characteristics did the neural network use to make classifications?</h4>
+
+
+
+
+</body>
+
+</html>
